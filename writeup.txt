@@ -1,4 +1,35 @@
-Part 2 - Decoding Instructions:
+Part 2.1 - English/C Desciption:
+
+.include "nios_macros.s"
+.global _start
+_start:
+/* the following two instr. (orhi and ori)are what movia converts to */
+orhi    r2, r0, %hi(X) #bitwise logical or immediate into high halfword
+ori		r2, r2, %lo(X) #bitwise logical or immediate
+movia   r3, Y          #move immediate address into word
+movia   r4, N
+ldw		r4, 0(r4)      #load 32-bit word from memory or I/O peripheral
+add		r5, r0, r0     #add
+LABEL:
+ldw		r6, 0(r2)      
+stw		r6, 0(r3)      #store word to memory or I/O peripheral
+addi    r2, r2, 4      #addi
+addi    r3, r3, 4
+subi    r4, r4, 1      #subtract immediate
+bgt		r4, r0, LABEL  #branch if greater than signed
+STOP:
+br STOP                #unconditional branch
+.data
+N:
+	.word 6
+X:
+	.word 5, 3, -6, 19, 8, 12
+Y:
+	.word 0, 0, 0, 0, 0, 0
+
+
+
+Part 2.2 - Decoding Instructions:
 
     Answer: stw r3, r4, 0xFFE4
 
@@ -19,7 +50,7 @@ Part 2 - Decoding Instructions:
             0b1_0011
             0x13 -> r3
 
-Part 3 - Encoding Instructions:
+Part 2.3 - Encoding Instructions:
 
     Answer:
 
