@@ -1,0 +1,28 @@
+Part 2 - Decoding Instructions:
+
+    Answer: stw r3, r4, 0xFFE4
+
+    Work:
+        0x993FF915
+        0b1001_1001_0011_1111_1111_1001_0001_0101
+
+        OP code:
+            0b1_0101
+            0x15 -> stw
+        IMM16:
+            0b1111_1111_1110_0100
+            0xFFE4
+        rB:
+            0b0_0110
+            0x04 -> r4
+        rA:
+            0b1_0011
+            0x13 -> r3
+
+Part 3 - Encoding Instructions:
+
+    Answer:
+
+    Work:
+
+        divu r14, r5, r22
