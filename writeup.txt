@@ -57,20 +57,26 @@ Part 2.3 - Encoding Instructions:
     Work:
 
         divu r14, r5, r22
-
-        OP code:
-            divu -> 0x24
-            0b10_0100
+	
+	divu rC, rA, rB
+	
+	OP code:
+        	divu -> 0x24
+    		0b100100
         i5:
+		0b00000
         OPX:
         rC:
-            0x14
-            0b1_0100
+    		0x14
+    		0b10100
         rB:
-            0x22
-            0b10_0100 //this is too many bits!!
+    		0x22
+    		0b100010 //this is too many bits!! (May not be an issue -Adam)
         rA:
-            0x05
-            0b0_0101
-            
+    		0x05
+    		0b00101
+		
+	R-Type Instruction
+	OP	i5	OPX	C	B	A
+        001001	00000   ???	00101	010001	10100 
         
