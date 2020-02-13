@@ -26,3 +26,19 @@ Part 3 - Encoding Instructions:
     Work:
 
         divu r14, r5, r22
+
+        OP code:
+            divu -> 0x24
+            0b10_0100
+        i5:
+        OPX:
+        rC:
+            0x22
+            0b10_0100 //this is too many bits!!
+        rB:
+            0x05
+            0b0_0101
+        rA:
+            0x14
+            0b1_0100
+        
