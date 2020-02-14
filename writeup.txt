@@ -33,16 +33,18 @@ Part 2.1 - English/C Desciption:
         5/6. expanded version of movia: creates the address of the declared integer (here X)
         7/8. creates the address of the declared integer (here Y and N respectively)
         9. loads value of N
-        10. 
-        11.
+        10. adds the zero register to zero and stores it in r5
         12. loads value of X
-        13. stores value of Y
+        13. stores value of Y (bitfield?)
         14. add 4 to X
         15. add 4 to Y
         16. subtract one from N
         17. if N is greater than 0 go to LABEL (line 11), else go on to next instruction
         19. unconditionally branch to STOP (line 18), stops the program (continually going between lines 18-19)
-        20. 
+        20. indicates assignment of data below
+        21/22. assigns the value of N
+        23/24. assigns value of X
+        25/26. assigns value of Y
 
 
     C-Code:
