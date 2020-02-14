@@ -30,7 +30,7 @@ Y:
 
 C-Desription
 int X_word[6] = {5, 3, -6, 19, 8, 12};
-int Y_word[6];
+int Y_word[6] = {0, 0, 0, 0, 0, 0};
 int N = 6;
 
 int i = 0;
