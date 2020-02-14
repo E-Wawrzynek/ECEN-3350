@@ -53,7 +53,7 @@ Part 2.1 - English/C Desciption:
         int N = 6;
 
         int i = 0;
-        for(i=N-1; i>=0; i--) {
+        for(i=N-1; i>0; i--) {
             X_word[i] = X_word[i-1] + 4;
             Y_word[i] = Y_word[i-1] + 4;
         }
