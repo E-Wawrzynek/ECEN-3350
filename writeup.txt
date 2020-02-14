@@ -28,6 +28,16 @@ Y:
 	.word 0, 0, 0, 0, 0, 0
 
 
+C-Desription
+int X_word[6] = {5, 3, -6, 19, 8, 12};
+int Y_word[6];
+int N = 6;
+
+int i = 0;
+for(i=N-1; i>=0; i--) {
+  Y_word[i] = X_word[i];
+}
+
 
 Part 2.2 - Decoding Instructions:
 
