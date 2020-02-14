@@ -82,7 +82,7 @@ Part 2.2 - Decoding Instructions:
 
 Part 2.3 - Encoding Instructions:
 
-    Answer: 0x2D9C0024 (R-type)
+    Answer: 0x2D9D203A (R-type)
 
     Work:
 
@@ -91,12 +91,13 @@ Part 2.3 - Encoding Instructions:
 	divu rC, rA, rB
 	
 	OP code:
-        	divu -> 0x24
-    		0b100100
+            0x3A
+            0b0011_1010	
         i5:
 		    0b00000
         OPX:
-            0b000000
+            divu -> 0x24
+    		0b100100
         rC:
     		r14
     		0b01110
@@ -109,5 +110,5 @@ Part 2.3 - Encoding Instructions:
     		0b00101
 
         rA rB rC OPX i5 OP
-        0b0010_1101_1001_1100_0000_0000_0010_0100
-        0x2D9C0024
+        0b0010_1101_1001_1101_0010_0000_0011_1010
+        0x2D9D203A
