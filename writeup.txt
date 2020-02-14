@@ -1,42 +1,59 @@
 Part 2.1 - English/C Desciption:
 
-    .include "nios_macros.s"
-    .global _start
-    _start:
-    /* the following two instr. (orhi and ori) are what movia converts to */
-    orhi    r2, r0, %hi(X) #bitwise logical or immediate into high halfword
-    ori		r2, r2, %lo(X) #bitwise logical or immediate
-    movia   r3, Y          #move immediate address into word
-    movia   r4, N
-    ldw		r4, 0(r4)      #load 32-bit word from memory or I/O peripheral
-    add		r5, r0, r0     #add
-    LABEL:
-    ldw		r6, 0(r2)      
-    stw		r6, 0(r3)      #store word to memory or I/O peripheral
-    addi    r2, r2, 4      #addi
-    addi    r3, r3, 4
-    subi    r4, r4, 1      #subtract immediate
-    bgt		r4, r0, LABEL  #branch if greater than signed
-    STOP:
-    br STOP                #unconditional branch
-    .data
-    N:
-        .word 6
-    X:
-        .word 5, 3, -6, 19, 8, 12
-    Y:
-        .word 0, 0, 0, 0, 0, 0
+    1. .include "nios_macros.s"
+    2. .global _start
+    3. _start:
+    4. /* the following two instr. (orhi and ori) are what movia converts to */
+    5. orhi    r2, r0, %hi(X) #bitwise logical or immediate into high halfword
+    6. ori		r2, r2, %lo(X) #bitwise logical or immediate
+    7. movia   r3, Y          #move immediate address into word
+    8. movia   r4, N
+    9. ldw		r4, 0(r4)      #load 32-bit word from memory or I/O peripheral
+    10. add		r5, r0, r0     #add
+    11. LABEL:
+    12. ldw		r6, 0(r2)      
+    13. stw		r6, 0(r3)      #store word to memory or I/O peripheral
+    14. addi    r2, r2, 4      #addi
+    15. addi    r3, r3, 4
+    16. subi    r4, r4, 1      #subtract immediate
+    17. bgt		r4, r0, LABEL  #branch if greater than signed
+    18. STOP:
+    19. br STOP                #unconditional branch
+    20. .data
+    21. N:
+    22.     .word 6
+    23. X:
+    24.     .word 5, 3, -6, 19, 8, 12
+    25. Y:
+    26.     .word 0, 0, 0, 0, 0, 0
+
+    English Desciption:
+        1. workaround for a bug in the movia instruction
+        2/3. indicates where to start in the program
+        5/6. expanded version of movia: creates the address of the declared integer (here X)
+        7/8. creates the address of the declared integer (here Y and N respectively)
+        9. loads value of N
+        10. 
+        11.
+        12. loads value of X
+        13. stores value of Y
+        14. add 4 to X
+        15. add 4 to Y
+        16. subtract one from N
+        17. if N is greater than 0 go to LABEL (line 11), else go on to next instruction
+        19. unconditionally branch to STOP (line 18), stops the program (continually going between lines 18-19)
+        20. 
 
 
-    C-Desription
-    int X_word[6] = {5, 3, -6, 19, 8, 12};
-    int Y_word[6] = {0, 0, 0, 0, 0, 0};
-    int N = 6;
+    C-Code:
+        int X_word[6] = {5, 3, -6, 19, 8, 12};
+        int Y_word[6] = {0, 0, 0, 0, 0, 0};
+        int N = 6;
 
-    int i = 0;
-    for(i=N-1; i>=0; i--) {
-    Y_word[i] = X_word[i];
-    }
+        int i = 0;
+        for(i=N-1; i>=0; i--) {
+        Y_word[i] = X_word[i];
+        }
 
 
 Part 2.2 - Decoding Instructions:
