@@ -61,7 +61,7 @@ Part 2.1 - English/C Desciption:
 
 Part 2.2 - Decoding Instructions:
 
-    Answer: stw r3, r4, 0xFFE4
+    Answer: stw r3, r4, 0xFFE4 (I-type)
 
     Work:
         0x993FF915
@@ -82,7 +82,7 @@ Part 2.2 - Decoding Instructions:
 
 Part 2.3 - Encoding Instructions:
 
-    Answer:
+    Answer: 0x2D9C0024 (R-type)
 
     Work:
 
@@ -94,19 +94,20 @@ Part 2.3 - Encoding Instructions:
         	divu -> 0x24
     		0b100100
         i5:
-		0b00000
+		    0b00000
         OPX:
+            0b000000
         rC:
-    		0x14
-    		0b10100
+    		r14
+    		0b01110
+            0x
         rB:
-    		0x22
-    		0b100010 //this is too many bits!! (May not be an issue -Adam)
+    		r22
+    		0b10110
         rA:
-    		0x05
+    		r5
     		0b00101
-		
-	R-Type Instruction
-	OP	i5	OPX	C	B	A
-        001001	00000   ???	00101	010001	10100 
-        
+
+        rA rB rC OPX i5 OP
+        0b0010_1101_1001_1100_0000_0000_0010_0100
+        0x2D9C0024
