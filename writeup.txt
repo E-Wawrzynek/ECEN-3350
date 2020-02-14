@@ -101,7 +101,6 @@ Part 2.3 - Encoding Instructions:
         rC:
     		r14
     		0b01110
-            0x
         rB:
     		r22
     		0b10110
