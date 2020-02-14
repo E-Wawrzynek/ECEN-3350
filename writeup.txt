@@ -92,7 +92,7 @@ Part 2.3 - Encoding Instructions:
 	
 	OP code:
             0x3A
-            0b0011_1010	
+            0b11_1010	
         i5:
 		    0b00000
         OPX:
