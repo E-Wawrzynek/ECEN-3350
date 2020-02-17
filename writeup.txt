@@ -32,11 +32,11 @@ Part 2.1 - English/C Desciption:
         2/3. indicates where to start in the program
         5/6. expanded version of movia: creates the address of the declared integer (here X)
         7. Stores address of Y into r3
-	8. Stores address of N into r4
+	    8. Stores address of N into r4
         9. Loads value of N into r4
         10. Usless instruction. Just adds 0+0 into r5
         12. loads value of X
-        13. stores value of Y (bitfield?)
+        13. stores value of Y
         14. add 4 to X
         15. add 4 to Y
         16. subtract one from N
@@ -56,8 +56,8 @@ Part 2.1 - English/C Desciption:
 	int *px;
 	int *py;
 	
-	px = x;
-	py = y;
+	px = X;
+	py = Y;
 
         do {
 		*py = *px;
