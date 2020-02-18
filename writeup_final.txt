@@ -30,49 +30,46 @@ Part 2.1 - English/C Desciption:
     English Desciption:
 	1. workaround for a bug in the movia instruction
 	2/3. indicates where to start in the program
-	5/6. expanded version of movia: stores the address of X into r2
-	7. Stores address of Y into r3
-	8. Stores address of N into r4
-	9. Loads the value of N into r4
-	10. Usless instruction. Just adds 0+0 into r5
-	12. Loads the value in X that r2 points to into r6
-	13. Stores the value of r6 into the spot in the memory location of r3
-	14. Increments the address of r2 by 4
-	15. Increments the address of r3 by 4
-	16. Decrements the value of r4 by 1
-	17. If the value of r4 is greater than 0 go to LABEL (line 11), else go on to next instruction
-	19. Unconditionally branch to STOP (line 18), stops the program (continually going between lines 18-19)
-	20. Indicates assignment of data below
+	5/6. stores the address of the beginning of X into r2 (an expanded version of movia)
+	7. stores address of the beginning of Y into r3
+	8. stores address of N into r4
+	9. loads the value of N into r4
+	10. instrunction adds 0+0 and stores in r5 (aka, useless)
+	12. loads the value in X that r2 points to into r6
+	13. stores the value of r6 into the spot in the memory location of r3
+	14/15. addresses of both r2 and r3 incremented by 4
+	16. decrements the value of r4 by 1
+	17. if the value of r4 is greater than 0 go to LABEL (line 11), else go on to next instruction
+	19. unconditionally branch to STOP (line 18), stops the program (continually going between lines 18-19)
+	20. indicates assignment of data below
 	21/22. assigns the value of N
 	23/24. assigns value of X
 	25/26. assigns value of Y
 
+    C Code:
 
-    C-Code:
-    	int N = 6;
-        int X[6] = {5, 3, -6, 19, 8, 12};
-        int Y[6] = {0, 0, 0, 0, 0, 0};
-	
-	int *px;
-	int *py;
-	
-	px = X;
-	py = Y;
+        int N = 6
+        int X[6] = {5, 3, -6, 19, 8, 12}
+        int Y[6] = {0, 0, 0, 0, 0, 0}
 
-        do {
-		*py = *px;
-		px++;
-		py++;
-		N--;
-	} while (N > 0)
+        int *p, *q;
 
+        p = X;
+        q = Y;
+
+        while(N > 0) {
+            *q = *p;
+            p++;
+            q++;
+            N--;
+        }
 
 Part 2.2 - Decoding Instructions:
 
-    Answer: stw r4, -28(r3) (I-type)
+    Answer: stw r4, -28(r19) (I-type)
 
     Work:
-    	stw rB, byte_offset(rA)
+    	instruction rB, byte_offset(rA)
 	
         0x993FF915
         0b1001_1001_0011_1111_1111_1001_0001_0101
@@ -81,16 +78,16 @@ Part 2.2 - Decoding Instructions:
             0b1_0101
             0x15 -> stw
         IMM16:
-            0b1111_1111_1110_0100
-            0xFFE4
-	    -28
+            signed: 0b1111_1111_1110_0100
+            unsigned: 0b0000_0000_0001_1100
+            unsigend: 0d28
+            signed: 0d-28
         rB:
-            0b0_0110
-            0x04 -> r4
+            0b0_0100
+            0d04 -> r4
         rA:
             0b1_0011
-            0x13 -> r3
-
+            0d19 -> r19
 
 Part 2.3 - Encoding Instructions:
 
@@ -118,9 +115,3 @@ Part 2.3 - Encoding Instructions:
         rA:
     		r5
     		0b00101
-
-        rA rB rC OPX i5 OP
-        0b00101101100111010010000000111010
-	0b0010_1101_1001_1101_0010_0000_0011_1010
-	  2    D    9    D    2    0    3    A
-        0x2D9D203A
