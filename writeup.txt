@@ -28,24 +28,24 @@ Part 2.1 - English/C Desciption:
     26.     .word 0, 0, 0, 0, 0, 0
 
     English Desciption:
-        1. workaround for a bug in the movia instruction
-        2/3. indicates where to start in the program
-        5/6. expanded version of movia: creates the address of the declared integer (here X)
-        7. Stores address of Y into r3
-	    8. Stores address of N into r4
-        9. Loads value of N into r4
-        10. Usless instruction. Just adds 0+0 into r5
-        12. loads value of X
-        13. stores value of Y
-        14. add 4 to X
-        15. add 4 to Y
-        16. subtract one from N
-        17. if N is greater than 0 go to LABEL (line 11), else go on to next instruction
-        19. unconditionally branch to STOP (line 18), stops the program (continually going between lines 18-19)
-        20. indicates assignment of data below
-        21/22. assigns the value of N
-        23/24. assigns value of X
-        25/26. assigns value of Y
+	1. workaround for a bug in the movia instruction
+	2/3. indicates where to start in the program
+	5/6. expanded version of movia: creates the address of the declared integer (here X)
+	7. Stores address of Y into r3
+	8. Stores address of N into r4
+	9. Loads the value of N into r4
+	10. Usless instruction. Just adds 0+0 into r5
+	12. Loads the value in X that r2 points to into r6
+	13. Stores the value of r6 into the spot in the memory location of r3
+	14. Increments the address of r2 by 4
+	15. Increments the address of r3 by 4
+	16. Decrements the value of r4 by 1
+	17. If the value of r4 is greater than 0 go to LABEL (line 11), else go on to next instruction
+	19. Unconditionally branch to STOP (line 18), stops the program (continually going between lines 18-19)
+	20. Indicates assignment of data below
+	21/22. assigns the value of N
+	23/24. assigns value of X
+	25/26. assigns value of Y
 
 
     C-Code:
