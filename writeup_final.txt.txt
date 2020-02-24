@@ -1,0 +1,117 @@
+Part 2.1 - English/C Desciption:
+
+    1. .include "nios_macros.s"
+    2. .global _start
+    3. _start:
+    4. /* the following two instr. (orhi and ori) are what movia converts to */
+    5. orhi    r2, r0, %hi(X) #bitwise logical or immediate into high halfword
+    6. ori		r2, r2, %lo(X) #bitwise logical or immediate
+    7. movia   r3, Y          #move immediate address into word
+    8. movia   r4, N
+    9. ldw		r4, 0(r4)      #load 32-bit word from memory or I/O peripheral
+    10. add		r5, r0, r0     #add
+    11. LABEL:
+    12. ldw		r6, 0(r2)      
+    13. stw		r6, 0(r3)      #store word to memory or I/O peripheral
+    14. addi    r2, r2, 4      #addi
+    15. addi    r3, r3, 4
+    16. subi    r4, r4, 1      #subtract immediate
+    17. bgt		r4, r0, LABEL  #branch if greater than signed
+    18. STOP:
+    19. br STOP                #unconditional branch
+    20. .data
+    21. N:
+    22.     .word 6
+    23. X:
+    24.     .word 5, 3, -6, 19, 8, 12
+    25. Y:
+    26.     .word 0, 0, 0, 0, 0, 0
+
+    English Desciption:
+	1. workaround for a bug in the movia instruction
+	2/3. indicates where to start in the program
+	5/6. stores the address of the beginning of X into r2 (an expanded version of movia)
+	7. stores address of the beginning of Y into r3
+	8. stores address of N into r4
+	9. loads the value of N into r4
+	10. instrunction adds 0+0 and stores in r5 (aka, useless)
+	12. loads the value in X that r2 points to into r6
+	13. stores the value of r6 into the spot in the memory location of r3
+	14/15. addresses of both r2 and r3 incremented by 4
+	16. decrements the value of r4 by 1
+	17. if the value of r4 is greater than 0 go to LABEL (line 11), else go on to next instruction
+	19. unconditionally branch to STOP (line 18), stops the program (continually going between lines 18-19)
+	20. indicates assignment of data below
+	21/22. assigns the value of N
+	23/24. assigns value of X
+	25/26. assigns value of Y
+
+    C Code:
+
+        int N = 6;
+        int X[6] = {5, 3, -6, 19, 8, 12};
+        int Y[6] = {0, 0, 0, 0, 0, 0};
+
+        int *p, *q;
+
+        p = X;
+        q = Y;
+
+        do {
+            *q = *p;
+            p++;
+            q++;
+            N--;
+        } while (N > 0)
+
+Part 2.2 - Decoding Instructions:
+
+    Answer: stw r4, -28(r19) (I-type)
+
+    Work:
+    	instruction rB, byte_offset(rA)
+	
+        0x993FF915
+        0b1001_1001_0011_1111_1111_1001_0001_0101
+
+        OP code:
+            0b1_0101
+            0x15 -> stw
+        IMM16:
+            signed: 0b1111_1111_1110_0100
+            unsigned: 0b0000_0000_0001_1100
+            unsigend: 0d28
+            signed: 0d-28
+        rB:
+            0b0_0100
+            0d04 -> r4
+        rA:
+            0b1_0011
+            0d19 -> r19
+
+Part 2.3 - Encoding Instructions:
+
+    Answer: 0x2D9D203A (R-type)
+
+    Work:
+        divu r14, r5, r22
+	
+	divu rC, rA, rB
+	
+	OP code:
+		0x3A
+		0b11_1010	
+        i5:
+    		0b00000
+        OPX:
+		divu -> 0x24
+    		0b100100
+        rC:
+    		r14
+    		0b01110
+        rB:
+    		r22
+    		0b10110
+        rA:
+    		r5
+    		0b00101
