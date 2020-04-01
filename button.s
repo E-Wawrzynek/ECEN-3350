@@ -1,8 +1,8 @@
 	.equ HEX_DISPS, 0xFF200020
 	.equ HEX_DISPS_2, 0xFF200030
 	.equ PUSHBUTTONS, 0xFF200050
-.global _start
-_start:
+#.global _start
+#_start:
 	movia   r16, HEX_DISPS 		# Address of HEX3...HEX0 Displays
 	movia	r22, HEX_DISPS_2
 	movia   r17, PUSHBUTTONS # Address of pushbuttons

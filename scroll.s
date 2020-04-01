@@ -1,48 +1,55 @@
-.equ	HEX_DISP_3_0, 0xFF200020
+.equ	HEX_DISPS, 0xFF200020
 .global _start
 _start:
-	movia	r2, HEX_DISP_3_0
-	movia	r3, scroll_message
-	movi 	r4, 0x0
-	movia	r8, repeat_pattern
+	movia	r16, HEX_DISPS
+	movia	r17, SCRL_MSG
+	movi 	r18, 0x0
+	movia	r19, PTRN
 	movi 	r10, 18
 	movi	r11, 30
-	stwio	r0, 0(r2)
-LOOP:	          
-	ori 	r5, r0, 0x4B40
-	orhi	r5, r5, 0x004C
-	br  	DELAY
-DELAY:
-	subi	r5, r5, 1
-	bgt 	r5, r0, DELAY
-	br 		CONTROLLER
-CONTROLLER:
-	blt 	r4, r10, SCROLL
-	blt 	r4, r11, PATTERN_DISP
+	stwio	r0, 0(r16)
+
+DEL_P1:	          
+	ori 	r8, r0, 0xFFFF
+	orhi	r8, r8, 0x004C
+	br  	DEL_P2
+
+DEL_P2:
+	subi	r8, r8, 1
+	bgt 	r8, r0, DEL_P2
+	br 		COMPTROLLER
+	
+COMPTROLLER:
+	blt 	r18, r10, SCRL
+	blt 	r18, r11, DISP_PTRN
 	br  	RESET
-PATTERN_DISP:
-	ldw 	r9, 0(r8)
-	stwio 	r9, 0(r2)
-	addi	r8, r8, 4
-	addi	r4, r4, 1
-	br  	LOOP
-SCROLL:
+
+DISP_PTRN:
+	ldw 	r9, 0(r19)
+	stwio 	r9, 0(r16)
+	addi	r19, r19, 4
+	addi	r18, r18, 1
+	br  	DEL_P1
+
+SCRL:
 	slli	r6, r6, 8
-	ldw 	r7, 0(r3)
+	ldw 	r7, 0(r17)
 	or  	r6, r6, r7
-	stwio	r6, 0(r2)
-	addi	r3,	r3, 4
-	addi	r4, r4, 1
-	br  	LOOP
+	stwio	r6, 0(r16)
+	addi	r17, r17, 4
+	addi	r18, r18, 1
+	br  	DEL_P1
+
 RESET:
-	movi	r4, 0x0
-	movia	r3, scroll_message
-	movia	r8, repeat_pattern
-	br  	LOOP
+	movi	r18, 0x0
+	movia	r17, SCRL_MSG
+	movia	r19, PTRN
+	br  	DEL_P1
+
 .data
-repeat_pattern:
+PTRN:
 	# A, B, A, B, A, B, C, blank, C, blank, C, blank
 	.word	0x49494949, 0x36363636, 0x49494949, 0x36363636, 0x49494949, 0x36363636, 0x7F7F7F7F, 0x00000000, 0x7F7F7F7F, 0x00000000, 0x7F7F7F7F, 0x00000000 
-scroll_message:
+SCRL_MSG:
 	# "Hello Buffs---____" 
 	.word	0x76, 0x79, 0x38, 0x38, 0x3F, 0x00, 0x7C, 0x3E, 0x71, 0x71, 0x6D, 0x40, 0x40, 0x40, 0x00, 0x00, 0x00, 0x00
