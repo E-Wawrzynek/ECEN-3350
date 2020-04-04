@@ -1,6 +1,11 @@
-.equ	HEX_DISPS, 0xFF200020
-.global _start
-_start:
+	.equ	HEX_DISPS, 0xFF200020
+	.equ	HEX_DISPS_2, 0xFF200030
+#.global _start
+#_start:
+	#have to blank the extra hex displays, only used in part 2
+	movia	r22, HEX_DISPS_2
+	stwio	r0, 0(r22)	
+
 	movia	r16, HEX_DISPS
 	movia	r17, SCRL_MSG
 	movi 	r18, 0x0
@@ -10,7 +15,8 @@ _start:
 	stwio	r0, 0(r16)
 
 DEL_P1:	          
-	ori 	r8, r0, 0xFFFF
+	ori 	r8, r0, 0x4B4C
+	slli	r8, r8, 9
 	orhi	r8, r8, 0x004C
 	br  	DEL_P2
 
