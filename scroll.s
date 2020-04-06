@@ -1,7 +1,7 @@
 	.equ	HEX_DISPS, 0xFF200020
 	.equ	HEX_DISPS_2, 0xFF200030
-#.global _start
-#_start:
+.global _start
+_start:
 	#have to blank the extra hex displays, only used in part 2
 	movia	r22, HEX_DISPS_2
 	stwio	r0, 0(r22)	

@@ -12,6 +12,7 @@
         <source_files>
             <source_file filepath="true">button.s</source_file>
             <source_file filepath="true">scroll.s</source_file>
+            <source_file filepath="true">button_new.s</source_file>
         </source_files>
         <options>
             <start_symbol>_start</start_symbol>
