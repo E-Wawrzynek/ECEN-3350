@@ -1,0 +1,9 @@
+Part 2.1:
+Name:
+"123456789aA+"
+Terminal output:
+"Hello, 123456789. Your grade is: A+"
+
+Part 2.2:
+STUDENT_NAME_LEN:   .word   0x10
+STUDENT_NAME:       .ascii "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xD0\x00\x00\x00"
